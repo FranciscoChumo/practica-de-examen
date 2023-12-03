@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('admistradors_id')->constrained('admistradors');
             $table->foreignId('trabajadors_id')->constrained('trabajadors');
-            $table->timestamps();
+           
         });
     }
 
