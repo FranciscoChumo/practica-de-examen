@@ -12,15 +12,20 @@ class TrabajadorController extends Controller
      */
     public function index()
     {
-        //
+        $trabajador= trabajador::where('estado', 1)->get();
+        return view("persona.trabajador", compact('trabajador'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $trabajador = new trabajador();
+        $trabajador->nombre = $request->nombre;
+        $trabajador->apellido = $request->apellido;
+        $trabajador->save();
+        return back();
     }
 
     /**
@@ -34,17 +39,25 @@ class TrabajadorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(trabajador $trabajador)
+    public function show(trabajador $trabajador,$id)
     {
-        //
+        $trabajador = trabajador::find($id);
+
+        return view('persona.trabajadorEdit', compact('trabajador'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(trabajador $trabajador)
+    public function edit(Request $request,$id)
     {
-        //
+        $trabajador = trabajador::find($id);
+        if ($trabajador) {
+            $trabajador->nombre = $request->nombre;
+            $trabajador->apellido = $request->apellido;
+            $trabajador->save();
+            return redirect('indexAutor');
+        }
     }
 
     /**
@@ -58,8 +71,13 @@ class TrabajadorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(trabajador $trabajador)
+    public function destroy(trabajador $trabajador, $id)
     {
-        //
-    }
+        $trabajador = trabajador::find($id);
+        if ($trabajador) {
+            $trabajador->estado = false;
+            $trabajador->save();
+            return back();
+        }
+}
 }
