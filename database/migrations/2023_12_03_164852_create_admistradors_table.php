@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('rol');
             $table->boolean('estado')->default(true);
         });
     }
