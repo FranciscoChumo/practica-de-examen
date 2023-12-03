@@ -10,4 +10,5 @@ class persona extends Model
     use HasFactory;
     public $timestamps=false;
     protected $table='personas';
+    
 }
