@@ -10,17 +10,23 @@ class PersonaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function vista(){
+        return view ('/');
+
+    }
+    public function index(){
+           
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $personas = new persona();
+        $personas->rol = $request->rol;
+        $personas->save();
+        return back();
     }
 
     /**
